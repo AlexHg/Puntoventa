@@ -122,9 +122,9 @@ $('#realizar_venta').click(function(){if($('#importe_input').val() >= total && t
 	if(confirm('Se ha generado un ticket. ¿Desea imprimirlo?')){
 		var ficha = $('#comprascontainer').html();
 		var totales_ficha = $('#totales').html();
-		var ventimp=window.open(' ','popimpr');
+		var ventimp=window.open(' ', "_blank", "toolbar=yes, scrollbars=yes, width=1000, height=900 ");
 		var head = '<h1>Mi Empresa/Negocio <small>'+""+new Date().getDate()+"/"+(new Date().getMonth()+1)+"/"+new Date().getFullYear()+" - "+new Date().getHours()+":"+new Date().getMinutes()+":"+new Date().getSeconds()+""+'</small></h1><br><br>';
-		var cssstyle = '<link href="assets/css/bootstrap.min.css" rel="stylesheet" /><link href="assets/css/bootstrap-responsive.min.css" rel="stylesheet" /><link rel="stylesheet" href="assets/css/font-awesome.min.css" /><link rel="stylesheet" href="assets/css/ace.min.css" /><link rel="stylesheet" href="assets/css/ace-responsive.min.css" /><link rel="stylesheet" href="assets/css/ace-skins.min.css" />';
+		var cssstyle = '<head><title>Imprimir factura</title></head><link href="assets/css/bootstrap.min.css" rel="stylesheet" /><link href="assets/css/bootstrap-responsive.min.css" rel="stylesheet" /><link rel="stylesheet" href="assets/css/font-awesome.min.css" /><link rel="stylesheet" href="assets/css/ace.min.css" /><link rel="stylesheet" href="assets/css/ace-responsive.min.css" /><link rel="stylesheet" href="assets/css/ace-skins.min.css" />';
 		var jscript = '<script src="js/jquery-1.11.2.min.js"></script><script>$(".deletebutton").remove(); $(".idpr").remove();</script>';
 		ventimp.document.write(cssstyle+'<div style="width: 8cm !important;">'+head+ficha+'<div class="span5">'+totales_ficha+'</div></div>'+jscript);
 		ventimp.document.close();

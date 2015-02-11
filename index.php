@@ -82,7 +82,7 @@
 				return 'content/calendario.html';
 				break;
 			case '/puntoventa/index.php':
-				echo '<script>window.location = "index.php?page=hacervental";</script>'; 
+				echo '<script>window.location = "index.php?page=hacerventa";</script>'; 
 				break;
 			default: 
 				include('content/error-404.html');
