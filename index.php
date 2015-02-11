@@ -1,10 +1,10 @@
 <?php 
-	include('topskin.html');
+	include('content/template/topskin.html');
 	$url = ''.$_SERVER["REQUEST_URI"].'';
 	include(url($url));
 	include('js/chat.html');
 	echo '<div width="100%" height="100px"></div>';
-	include('bottomskin.html');
+	include('content/template/bottomskin.html');
 
 	function url($url){
 		switch($url){
