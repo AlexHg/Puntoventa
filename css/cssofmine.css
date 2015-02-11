@@ -1,0 +1,5 @@
+body .page-content #lectorqr-content #reader{margin-bottom:10px}
+body .page-content #lectorqr-form{text-align:center;}
+@media (min-width: 765px){body .page-content #lectorqr-form{padding-top:0}
+}@media (max-width: 764px){body .page-content #lectorqr-form{padding-top:0 !important}
+}body .page-content #lectorqr-form input,body .page-content #lectorqr-form textarea{background-color:#fff !important}

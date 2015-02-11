@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="js/jquery-1.11.2.min.js"></script>
+    <script src="js/qrscanner/html5-qrcode.min.js"></script>
+</head>
+<body>
+	<div class="jumbotron">
+	</div>  
+   	<div class="row">
+   		<div>
+  			<h2>Lector QR</h2>
+			<div id="reader" style="width:300px;height:250px;background:#D2D3CB;"></div>
+    	</div>
+    	<form>
+    		<input type="text" name="qrcode" id="qrcode" maxlength="12"></input>
+
+    	</form>
+  	</div>
+
+<!-- Con este script se produce una accion al detectar el codigo QR -->
+<script src="js/qrscanner/check&sound.js"></script>
+</body>
+
+</html>

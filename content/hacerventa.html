@@ -1,0 +1,133 @@
+				<div class="page-content">
+					<div class="page-header position-relative">
+						<div class="row-fluid" id="lectorqr-content">
+							  
+						   	<div class="span5">
+						   		<div>
+						  			<h3><i class="icon-qrcode" style="padding:4px;"></i> Escanee su codigo. </h3>
+									<div id="reader" style="width:300px;max-width:100%;height:230px;background:#D2D3CB;"></div>
+						    	</div>
+						  	</div>
+						  	<div class="span7" id="lectorqr-form">
+						  		<h3>Informacion producto</h3>
+						    	<form>
+						    		<input type="text" name="qrcode" id="qrcode" maxlength="12" style="max-width:110px" placeholder="ID. Producto" required></input>&nbsp;&nbsp;
+						    		<input type="text" name="nombreproducto" id="nombreproducto" placeholder="Nombre Producto" disabled></input>&nbsp;&nbsp;
+						    		<input type="number" name="cantidadproducto" id="cantidadproducto" maxlength="2" style="max-width:48px" min="1" placeholder="Cant." required></input>&nbsp;&nbsp;
+						    		<span class="input-prepend">
+										<span class="add-on"><i class="icon-dollar"></i></span>
+										<input type="number" name="precioproducto" id="precioproducto" disabled style="max-width:70px" placeholder="00.00" required></input>
+									</span>&nbsp;&nbsp;
+									<div>
+										<textarea disabled id="descripcionproducto" placeholder="Descripción del producto" style="resize: none; min-height: 5em; max-width: 93%; width:37.9em;"></textarea>
+									</div>
+									<div>
+										<p>Stock actual: <span id="stockproducto">0</span> unidades.</p>
+									</div>
+									<div>
+										<button id="addarticle" type="button" class="btn btn-info">
+											<i class="icon-plus bigger-110"></i> Agregar
+										</button>
+										<button class="btn" type="reset">
+										<i class="icon-undo bigger-110"></i> Limpiar
+										</button>
+									</div>
+						    	</form>
+						  	</div>
+						</div>
+						<h1><i class="icon-shopping-cart" style="padding:4px;"></i> Carrito de compras
+							<small>
+								<i class="icon-double-angle-right"></i>
+								Productos
+							</small>
+						</h1>
+					</div><!--/.page-header-->
+
+					<div class="row-fluid">
+						<div class="span12">
+							<!--PAGE CONTENT BEGINS-->
+
+							<div class="row-fluid">
+								<div class="span12">
+									<div id="comprascontainer">
+									<table id="sample-table-1 carritocompras" class="table table-striped table-bordered table-hover" style="max-width:98%; margin-left:-3px;">
+										<thead>
+											<tr>
+												<th class="idpr">ID</th>
+												<th class="hidden-480">Nombre</th>
+												<th class="hidden-phone"><i class="icon-time bigger-110 hidden-phone"></i> Fecha - Hora</th>
+
+												<th>Cantidad</th>
+												<th>Precio</th>
+
+												<th class="deletebutton"></th>
+											</tr>
+										</thead>
+
+										<tbody id="carritotabla">
+												
+											<!--INICIO Ejemplo
+												<tr id="fila">
+													<td id="id">15158231</td>
+													<td id="nombre" class="hidden-480">Escoba voladora</td>
+													<td id="fecha"class="hidden-phone">24/01/15 - 13:00</td>
+													<td id="cantidad">2</td>
+													<td id="precio">$50.00</td>
+
+													<td style="text-align:center;">
+														<button id="delete" class="btn btn-mini btn-danger">
+															<i class="icon-trash bigger-120"></i>
+														</button>
+													</td>
+												</tr>
+											FIN Ejemplo-->
+										</tbody>
+										<!-- Total -->
+										<tr style="background-color: white !important;" id="total">
+											<td ></td>
+											<td style="border-left: 1px solid rgba(0,0,0,0);" class="hidden-480 idpr"></td>
+											<td style="border-left: 1px solid rgba(0,0,0,0);" class="hidden-phone"></td>
+											<td style="border-left: 1px solid rgba(0,0,0,0); text-align:right">Total:</td>
+											<td style="border-left: 1px solid rgba(0,0,0,0); color: #D90000;" >$<span id="totalprecio">00.00</span></td>
+											<td style="border-left: 1px solid rgba(0,0,0,0); text-align:center;" class="deletebutton"></td>
+										</tr>
+									</table>
+									</div>
+									<div id="importe" class="span5" align="left">
+										<span class="add-on"><i class="icon-dollar"></i></span>
+										<input type="price" name="importe_input" id="importe_input" style="max-width:70px" placeholder="00.00" required></input>
+										<span> - Ingrese el importe</span>
+									</div>
+									<div class="span6" id="totales" align="right">
+										<span id="total_neva">Total: $<span id="totalneto">00.00</span>(Neto) + $<span id="totaliva">00.00</span>(IVA 16%) = $<span id="total_neto_iva">00.00</span></span>
+									<br>
+										Importe: $<span id="importe_regis">0.00</span>
+									<br>
+										Cambio: $<span id="cambio">0.00</span>
+									</div>
+									</div>
+									<div align="center">
+										<button type="button" id="realizar_venta" class="btn btn-info" style="margin-bottom:10px;">
+											<i class="icon-ok bigger-110"></i> Realizar venta
+										</button>
+										<button class="btn" type="reset" onclick="location.reload()" style="margin-bottom:10px;">
+										<i class="icon-minus bigger-110"></i> Cancelar venta
+										</button>
+									</div>
+								</div><!--/span-->
+							</div><!--/row-->
+
+							<div class="hr hr-18 dotted hr-double"></div>
+
+							<div class="hr hr-18 dotted hr-double"></div>
+
+							</div><!--PAGE CONTENT ENDS-->
+						</div><!--/.span-->
+					</div><!--/.row-fluid-->
+				</div><!--/.page-content-->
+			</div><!--/.main-content-->
+		</div><!--/.main-container-->
+
+		<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-small btn-inverse">
+			<i class="icon-double-angle-up icon-only bigger-110"></i>
+		</a>
