@@ -26,22 +26,18 @@
 									<div class="row-fluid">
 										<div class="span12" style="padding:3em;">
 											<form align="center">
-												<input type="text" placeholder="ID. producto" class=""> - <input type="number" placeholder="Cant." style='max-width:48px' min="1" class=""><br><br>
-												  
-												<select  data-placeholder="Sucursal actual" disabled>
-													<option value="(aqui va el id sucursal)">sucursal #1</option>
-													<option value="(aqui va el id sucursal)">sucursal #2</option>
-													<option value="(aqui va el id sucursal)">sucursal #3</option>
-												</select>
-												>>
-												<select  data-placeholder="Sucursal a traspasar"> 
-													<option value="(aqui va el id sucursal)">sucursal #1</option>
-													<option value="(aqui va el id sucursal)">sucursal #2</option>
-													<option value="(aqui va el id sucursal)">sucursal #3</option>
-												</select>
+												<input type="text" name="nombreproducto" id="nombreproducto" placeholder="Nombre Producto" required></input>&nbsp;&nbsp;
+									    		<input type="number" name="cantidadproducto" id="cantidadproducto" maxlength="3" style="max-width:70px" min="1" placeholder="Stock inicial" required></input>&nbsp;&nbsp;
+									    		<span class="input-prepend">
+													<span class="add-on"><i class="icon-dollar"></i></span>
+													<input type="number" name="precioproducto" id="precioproducto" style="max-width:70px" placeholder="00.00" required></input>
+												</span>&nbsp;&nbsp;
+												<div>
+													<textarea id="descripcionproducto" placeholder="Descripción del producto" style="resize: none; min-height: 5em; max-width: 93%; width:37.9em;" required></textarea>
+												</div>
 												<div class="span12" align="center">
 													<button  type="button" id="traspasar_now" class="btn btn-info" style="margin-top:20px;" >
-														<i class="icon-ok bigger-110"></i> Realizar un traspaso
+														<i class="icon-ok bigger-110"></i> Agregar producto
 														
 													</button>
 

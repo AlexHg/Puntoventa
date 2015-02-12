@@ -10,10 +10,48 @@
 					</div><!--/.page-header-->
 					<div class="row-fluid">
 						<div class="span12" align="left">
-							<button type="button" id="realizar_devolucion" class="btn btn-info" style="margin-bottom:10px;">
-								<i class="icon-ok bigger-110"></i> Realizar una devolucion
+							<div class="span12" align="left">
+							<button href="#modal" type="button" id="agregar_producto" class="btn btn-info" data-toggle="modal" style="margin-bottom:10px;">
+								<i class="icon-ok bigger-110"></i> Agregar producto
 							</button>
 						</div>
+						<div id="modal" class="modal hide fade" tabindex="-1">
+								<div class="modal-header no-padding">
+									<div class="table-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										Devolver un producto
+									</div>
+								</div>
+
+								<div class="modal-body no-padding">
+									<div class="row-fluid">
+										<div class="span12" style="padding:3em;">
+											<form align="center">
+												<input type="text" name="id_producto" id="id_producto" placeholder="ID. Producto" required></input>&nbsp;&nbsp;
+									    		<input type="number" name="cantidadproducto" id="cantidadproducto" maxlength="2" style="max-width:70px" min="1" placeholder="Stock inicial" required></input>&nbsp;&nbsp;
+												<div>
+													<textarea id="devolucion_razon" placeholder="Razon de la devolucion del producto." style="resize: none; min-height: 5em; max-width: 93%; width:37.9em;" required></textarea>
+												</div>
+												<div class="span12" align="center">
+													<button  type="button" id="traspasar_now" class="btn btn-info" style="margin-top:20px;" >
+														<i class="icon-ok bigger-110"></i> Devolver producto
+														
+													</button>
+
+												</div>
+
+											</form>
+										</div>
+									</div>
+								</div>
+
+								<div class="modal-footer">
+									<button class="btn btn-small btn-danger pull-left" data-dismiss="modal">
+										<i class="icon-remove"></i>
+										Close
+									</button>
+								</div>
+							</div><!--PAGE CONTENT ENDS-->
 					</div>
 					<div class="row-fluid">
 						<div class="span12">

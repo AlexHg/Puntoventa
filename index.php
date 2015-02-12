@@ -13,7 +13,7 @@
 				echo '<script>
 						document.getElementById("phacerventa").className = "active";
 					  </script>';
-				
+
 				return 'content/hacerventa.html';
 				break;
 			case '/puntoventa/index.php?page=estadisticas':
