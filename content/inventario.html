@@ -11,7 +11,7 @@
 					<div class="row-fluid">
 						<div class="span12" align="left">
 							<button href="#modal" type="button" id="agregar_producto" class="btn btn-info" data-toggle="modal" style="margin-bottom:10px;">
-								<i class="icon-ok bigger-110"></i> Agregar producto
+								<i class="icon-ok bigger-110"></i> Agregar un producto
 							</button>
 						</div>
 						<div id="modal" class="modal hide fade" tabindex="-1">
@@ -34,6 +34,23 @@
 												</span>&nbsp;&nbsp;
 												<div>
 													<textarea id="descripcionproducto" placeholder="Descripción del producto" style="resize: none; min-height: 5em; max-width: 93%; width:37.9em;" required></textarea>
+												</div>
+												<div >
+													<label for="categoria_producto">Categoria</label>
+													<select name="categoria_producto" id="categoria_producto" required>
+														<option value=""></option>
+														<option value="">categoria 1</option>
+														<option value="" selected>Categoria 2</option>
+													</select>
+												</div>
+
+												<div >
+													<label for="proveedor_producto">Proveedor</label>
+													<select name="proveedor_producto" id="proveedor_producto" required>
+														<option value=""></option>
+														<option value="">Proveedor 1</option>
+														<option value="" selected>Proveedor 2</option>
+													</select>
 												</div>
 												<div class="span12" align="center">
 													<button  type="button" id="traspasar_now" class="btn btn-info" style="margin-top:20px;" >

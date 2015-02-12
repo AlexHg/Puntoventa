@@ -55,7 +55,7 @@
 /* ---------- LIVE-CHAT ---------- */
 
 #live-chat {
-	bottom: -15px;
+	bottom: 0px;
 	font-size: 12px;
 	right: 28px;
 	position: fixed;
@@ -258,22 +258,24 @@
 	</div> <!-- end live-chat -->
 
 	<script type="text/javascript">
-		(function() {
-
-	$('#live-chat header').on('click', function() {
+	(function() {
 
 		$('.chat').slideToggle(300, 'swing');
 		$('.chat-message-counter').fadeToggle(300, 'swing');
+		$('#live-chat header').on('click', function() {
 
-	});
+			$('.chat').slideToggle(300, 'swing');
+			$('.chat-message-counter').fadeToggle(300, 'swing');
 
-	$('.chat-close').on('click', function(e) {
+		});
 
-		e.preventDefault();
-		$('#live-chat').fadeOut(300);
+		$('.chat-close').on('click', function(e) {
 
-	});
+			e.preventDefault();
+			$('#live-chat').fadeOut(300);
 
-}) ();
+		});
+
+	}) ();
 	</script>
 	
