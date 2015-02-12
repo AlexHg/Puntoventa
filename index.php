@@ -8,10 +8,12 @@
 
 	function url($url){
 		switch($url){
-			case '/puntoventa/index.php?page=hacerventa':echo '<script src="js/qrscanner/html5-qrcode.min.js"></script>';
+			case '/puntoventa/index.php?page=hacerventa':
+				echo '<script src="js/qrscanner/html5-qrcode.min.js"></script>';
 				echo '<script>
 						document.getElementById("phacerventa").className = "active";
 					  </script>';
+				
 				return 'content/hacerventa.html';
 				break;
 			case '/puntoventa/index.php?page=estadisticas':
@@ -98,4 +100,5 @@
 				break;
 		}
 	}
+
 ?>
