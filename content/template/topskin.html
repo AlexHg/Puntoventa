@@ -257,7 +257,7 @@
 								<img class="nav-user-photo" src="assets/avatars/avatar2.png" alt="Jason's Photo" />
 								<span class="user-info">
 									<small>Bienvenido,</small>
-									Admin
+									<?php echo $_SESSION["username"] ?>
 								</span>
 
 								<i class="icon-caret-down"></i>
@@ -281,9 +281,9 @@
 								<li class="divider"></li>
 
 								<li>
-									<a href="#">
+									<a href="php/cerrar.php">
 										<i class="icon-off"></i>
-										Cerrar secion
+										Cerrar sesion
 									</a>
 								</li>
 							</ul>
