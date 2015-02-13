@@ -1,0 +1,85 @@
+.row{max-width:80rem !important;box-align:center;text-align:center}
+.cont-1,.cont-2,.cont-3,.cont-4,.cont-5,.cont-6,.cont-7,.cont-8,.cont-9,.cont-10,.cont-11,.cont-12,.cont-5{min-height:2em;text-align:left;padding:.5em 1em;}
+@media only screen and (max-width: 700px){.cont-1,.cont-2,.cont-3,.cont-4,.cont-5,.cont-6,.cont-7,.cont-8,.cont-9,.cont-10,.cont-11,.cont-12,.cont-5{width:100% !important}
+}.cont-1{width:8%}
+.cont-2{width:16%}
+.cont-3{width:24%}
+.cont-4{width:33%}
+.cont-5{width:41%}
+.cont-6{width:49%}
+.cont-7{width:58%}
+.cont-8{width:66%}
+.cont-9{width:74%}
+.cont-10{width:83%}
+.cont-11{width:91%}
+.cont-12{width:99%}
+.columna{display:inline-block;vertical-align:top}
+body{margin:0;}
+body header{height:45px;background:#32342c;}
+body header #logoAndNotifications,body header #navigator{display:inline-block;vertical-align:top}
+body header #logoAndNotifications{width:150px;background:#22231e;height:100%;}
+body header #logoAndNotifications:hover{background:#171814}
+body header #logoAndNotifications #logo{width:100px;padding-left:10px;padding-top:10px;color:#e0e1dc}
+body header #logoAndNotifications #notifications{width:40px;text-align:right;font-size:3em;color:#32342c;margin-top:-2px;-ms-transform:scaleY(1.3);-moz-transform:scaleY(1.3);-webkit-transform:scaleY(1.3);-o-transform:scaleY(1.3);transform:scaleY(1.3)}
+body header #logoAndNotifications #logo,body header #logoAndNotifications #notifications{display:inline-block;vertical-align:top}
+body header #logoAndNotifications #num{position:absolute !important;font-size:20px;top:10px;left:129px;color:#171814}
+body header #logoAndNotifications .activeNotific{color:#d01e04 !important}
+body header #navigator{float:right;width:50%;min-width:550px;text-align:right;}
+body header #navigator ul li{list-style:none;display:inline-block;height:45px;vertical-align:top;padding-top:10px;background:#23241f;color:#e0e1dc;}
+body header #navigator ul li:hover{background:#171814}
+body header #navigator ul #home{font-size:1.5em;padding-top:5px !important}
+body header #navigator ul .normal{width:18%;text-align:center}
+body header #navigator ul .separador{width:1px;height:45px;margin:0 -4px;border-left:1px solid #171814;border-right:1px solid #32342c}
+body header #navigator #movileNavButton{height:45px;background:#22231e;text-align:center;width:3em;float:right;position:absolute;top:0;right:0;padding-top:5px;}
+body header #navigator #movileNavButton #hamburger{font-size:2em;vertical-align:top;color:#494b40}
+body header #navigator #movileNavButton:hover{background:#171814}
+body #movileNav{background:#21221d;padding-right:-10px;}
+body #movileNav .normal{width:100%;list-style:none;height:3em;padding:1em 0 0 1em;color:#e0e1dc;}
+body #movileNav .normal:hover{background:#171814}
+body #movileNav .separador{height:2px;width:100%;border-top:1px solid #171814;border-bottom:1px solid #32342c}
+body #movileNav .separador2{border-top:1px dashed #171814;border-bottom:1px dashed #32342c}
+body #notification{width:250px;background:#22231e;position:absolute;}
+body #notification .noti{height:3em;padding-top:.3em;padding-left:.7em;color:#e0e1dc;}
+body #notification .noti:hover{background:#171814}
+body #notification .noti .high,body #notification .noti .medium,body #notification .noti .low{font-size:1.2em}
+body #notification .noti .high{color:#f42500}
+body #notification .noti .medium{color:#db6f02}
+body #notification .noti .low{color:#4bab0c}
+body #indexLogIn #logoIndexApp{font-size:4em !important;text-align:center;color:#404040 !important;}
+body #indexLogIn #logoIndexApp h2{color:#404040 !important}
+body #indexLogIn #logoIndexApp small{color:#f4833e;font-weight:normal}
+body #indexLogIn #logoIndexApp #icontainer{margin-bottom:-.5em;}
+body #indexLogIn #logoIndexApp #icontainer .fi-cloud{font-size:1.7em}
+body #indexLogIn .fi-torso-business,body #indexLogIn .fi-lock{text-align:center !important;font-size:2em !important}
+body #indexLogIn form{text-align:center !important;}
+body #indexLogIn form label{font-size:1.3rem !important;display:inline-block;text-align:center;vertical-align:top}
+body #indexLogIn form input{width:75%;display:inline-block !important;vertical-align:top;margin:.2em 0 0 .5em;}
+body #indexLogIn form input #user,body #indexLogIn form input #pass{width:50% !important;display:inline-block}
+body #indexLogIn form #checkbox1{width:20px;}
+body #indexLogIn form #checkbox1 #contCheck{font-size:.2em !important}
+body #indexLogIn form .button{width:40%}
+body #pagePrin #down-bar{border-bottom:2px dashed #f1f1ef;margin-bottom:2em;}
+body #pagePrin #down-bar #titulo{padding-left:20px;width:75%;}
+body #pagePrin #down-bar #titulo h1{font-size:2.5rem}
+body #pagePrin #down-bar #user{text-align:right;padding-right:40px;width:20%;margin-top:10px;}
+body #pagePrin #down-bar #user a{color:#606354}
+body #pagePrin #down-bar #user .icon{margin-top:5px;font-size:1.5em}
+body #pagePrin #down-bar #user #user-menu{position:absolute;float:right;right:90px;margin-top:-25px;width:200px;border-top:1px dashed #b7b9ad;border-right:1px solid #b7b9ad;border-left:1px solid #b7b9ad;border-bottom:1px solid #b7b9ad;text-align:center;background:#fdfdfd;}
+body #pagePrin #down-bar #user #user-menu div{height:2em;padding-top:.5em;}
+body #pagePrin #down-bar #user #user-menu div:hover{background:#efefec}
+body #pagePrin #down-bar #titulo,body #pagePrin #down-bar #user{display:inline-block;vertical-align:top;color:#606354}
+body #pagePrin #pageResumen #pacienteActual{text-align:center;}
+body #pagePrin #pageResumen #pacienteActual h4{text-align:center}
+body #pagePrin #pageResumen #pacienteActual #info{border-bottom:1px dashed #606354;border-top:1px dashed #606354;padding-top:.7em;}
+body #pagePrin #pageResumen #pacienteActual #info #image{height:40px;width:40px;background:#000;margin:0 10px 0 0}
+body #pagePrin #pageResumen #pacienteActual #info p{margin-top:.5em}
+body #pagePrin #pageResumen #pacienteActual #info .fi-eye{font-size:1.3em}
+body #pagePrin #pageResumen #pacienteActual #info p,body #pagePrin #pageResumen #pacienteActual #info #image{display:inline-block;vertical-align:top}
+body #pagePrin #pageResumen #proximasCitas{text-align:center;}
+body #pagePrin #pageResumen #proximasCitas table{width:100%}
+body #pagePrin #pageResumen #proximasCitas td{text-align:left;}
+body #pagePrin #pageResumen #proximasCitas td i{font-size:2.2em}
+body #pagePrin #pageAgenda #vistaDiaria{text-align:center;}
+body #pagePrin #pageAgenda #vistaDiaria table{width:100%}
+body #pagePrin #pageAgenda #vistaDiaria td{text-align:left;}
+body #pagePrin #pageAgenda #vistaDiaria td i{font-size:2.2em}

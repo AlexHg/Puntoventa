@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
-	<title>Punto de venta</title>
+	<title><?PHP echo $titulosoft ?></title>
 	<meta name="description" content="Ventas &amp; QRscanner" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<!--Css propio-->
@@ -30,14 +30,14 @@
 
 </head>
 
-<body>
+<body class="<?PHP echo $skin; ?>">
 <div class="navbar">
 			<div class="navbar-inner">
 				<div class="container-fluid">
 					<a href="#" class="brand">
 						<small>
-							<i class="icon-leaf"></i>
-							PuntoVenta
+							<i class="icon-bolt"></i>
+							<?PHP echo $titulosoft ?>
 							<small> - Sucursal #1</small>
 						</small>
 					</a><!--/.brand-->
@@ -413,7 +413,7 @@
 					</li>
 
 
-					<li id="pcalendario">
+					<!--<li id="pcalendario">
 						<a href="?page=calendario">
 							<i class="icon-calendar"></i>
 
@@ -424,7 +424,7 @@
 								</span>
 							</span>
 						</a>
-					</li>
+					</li>-->
 
 					<li>
 						<a href="#" class="dropdown-toggle">

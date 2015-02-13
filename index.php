@@ -1,4 +1,7 @@
 <?php 
+	$titulosoft = 'Punto Venta!!';
+	$skin = 'skin-1'; // skin-1, skin-2, skin-3. para dejarlo default solo dejarlo en blanco
+
 	$url = ''.$_SERVER["REQUEST_URI"].'';
 	session_start();
 	$conexion = session_status();	
@@ -14,7 +17,9 @@ if(is_session_started()){
 	if($url != '/puntoventa/index.php?page=login'){
 		echo "<script>window.location ='index.php?page=login'</script>";
 	}
-	echo "<div class = 'container'>
+	if(!isset($_SESSION["username"])){
+	include("php/loginstyle.php");
+	/*echo "<div class = 'container'>
 			 <link rel='stylesheet' href='css/stylepass.css'>
 		       <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 		       <link href='http://fonts.googleapis.com/css?family=Pacifico&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
@@ -31,7 +36,8 @@ if(is_session_started()){
 						<button>Registrarse</button>
 					</form>
 				</center>
-		</div>";
+		</div>";*/
+	}
 }
 function is_session_started()
 {
