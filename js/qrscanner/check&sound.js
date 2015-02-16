@@ -59,6 +59,7 @@ var id_producto, nombre_producto, fecha_hora, cant_producto, precio_producto;
 var contador = -1;
 var precio_producto = [];
 var total = 0.00;
+var n_productos = 0;
 $('#addarticle').click(function(){
 	var cero_ms = "";
 	var cero_da = "";
@@ -72,6 +73,7 @@ $('#addarticle').click(function(){
 	fecha_hora = ""+new Date().getFullYear()+"/"+cero_ms+(new Date().getMonth()+1)+"/"+cero_da+new Date().getDate()+" - "+cero_hr+new Date().getHours()+":"+cero_mn+new Date().getMinutes()+":"+cero_sg+new Date().getSeconds()+"";
 	cant_producto = parseInt($('#cantidadproducto').val());
 	if(id_producto != false && cant_producto != false){
+		n_productos++;
 		//suma el valor del contador
 		contador = contador+1;
 		//calcula el precio del o los productos del mismo id (precio.uidad * cantidad)
@@ -99,6 +101,7 @@ var cont_num_fil_el = 0;
 function delet(num_contador_delete){
 	var producto_a_restar = precio_producto[num_contador_delete];
 	total = total-producto_a_restar;
+	n_productos--;
 	$('#totalprecio').html(""+total);
 	$('#total_neto_iva').html($('#totalprecio').html());
 	var iva = total*0.16;

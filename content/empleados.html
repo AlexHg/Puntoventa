@@ -27,20 +27,20 @@
 								<div class="modal-body no-padding">
 									<div class="row-fluid">
 										<div class="span12" style="padding:3em;">
-											<form align="center">
+											<form align="center" method="POST" action="php/registro_users.php">
 												<h4>Imagen de perfil</h4>
 												<div class="">
-													<input multiple="" type="file" id="id-input-file-3" />
+													<input multiple="" type="file" id="id-input-file-3" name = "img" />
 													<label style="display:nonem;">
-														<input type="checkbox" name="file-format" id="id-file-format" checked/>
+														<input type="checkbox" name="file-format" id="id-file-format" checked="checked"/>
 														<span class="lbl"> Allow only images</span>
 													</label>
 												</div>
 												<br>
 												<input type="text" name="nick_nusuario" id="nick_nusuario" placeholder="Usuario" required></input>
 												<br>
-												<input type="text" name="contraseña" id="contraseña" placeholder="Nueva contraseña" required></input>
-												<input type="text" name="contraseña_a" id="contraseña_a" placeholder="Repita la contraseña" required></input>
+												<input type="password" name="pass" id="contrasena" placeholder="Nueva contraseña" required></input>
+												<input type="password" name="pass2" id="contrasena_a" placeholder="Repita la contraseña" required></input>
 												<br><br>
 												<input class="span5" type="text" name="nombre_nusuario" id="nombre_nusuario" placeholder="Nombre completo" required></input>
 									    		<input class="span2" type="number" name="edad_nunsuario" id="edad_nunsuario" maxlength="2" style="max-width:70px" placeholder="Edad" required></input>
@@ -53,22 +53,46 @@
 										    		<input class="span4" type="text" name="ciudad" id="ciudad" placeholder="Ciudad" required></input>
 										    	</div>
 										    	<div>
-										    		<input class="span5" type="text" name="direccion1" id="direccion1" placeholder="Direccion 1" required></input>
-										    		<input class="span5" type="text" name="direccion2" id="direccion2" placeholder="Direccion 2" ></input>
+										    		<input class="span5" type="text" name="direccion1" id="direccion1" placeholder="Direccion 1" required></input>							
 										    		<input class="span2" type="text" name="cp" id="cp" placeholder="CP." required></input>
 												</div>
+												<label>Antiguedad</label>
+												<input type="date" placeholder="dd-mm-aaaa" name="date_register" required></input>
+												<label>Sucursal</label>
+												<?php
+
+													include("php/conexion.php");
+													$db = new conexion();
+													$sql = "SELECT * FROM sucursales";
+													$res = $db -> ejecutar($sql);
+													$sql2 = "SELECT * FROM permisos";
+													$res2 = $db -> ejecutar($sql2);
+												?>
+												<select name = "sucursal" required>
+													<option value="" selected>Elige</option>
+													<?php while($row=mysql_fetch_array($res))
+													{?>
+													<option value="<?php echo $row['id']?>"> <?php echo htmlentities($row['name_suc']);?></option>
+													<?php } 
+													
+													?>
+												</select>	
 												<label for="permisos_nusuario">Permisos</label>
-												<select name="permisos_nusuario" id="permisos_nusuario" required>
-													<option value=""></option>
-													<option value="">Admin</option>
-													<option value="" selected>Vendedor</option>
-													<option value="">Ventedor2</option>
+												
+												<select name="permisos" id="permisos_nusuario" required>
+													<option value="" selected>Elige</option>
+													<?php while($row=mysql_fetch_array($res2))
+													{?>
+													<option value="<?php echo $row['id']?>"> <?php echo htmlentities($row['tipo_permiso']);?></option>
+													<?php } 
+														$db->close();
+													?>
 												</select>
 												<div>
-													<textarea id="notas_nusuario" placeholder="Notas, caracteristicas, etc. del nuevo empleado" style="resize: none; min-height: 5em; max-width: 93%; width:37.9em;" required></textarea>
+													<textarea name="notas_nusuario" id="notas_nusuario" placeholder="Notas, caracteristicas, etc. del nuevo empleado" style="resize: none; min-height: 5em; max-width: 93%; width:37.9em;" required></textarea>
 												</div>
 												<div class="span12" align="center">
-													<button  type="button" id="traspasar_now" class="btn btn-info" style="margin-top:20px;" >
+													<button  type="submit" id="traspasar_now" class="btn btn-info" style="margin-top:20px;" >
 														<i class="icon-ok bigger-110"></i> Agregar nuevo empleado
 														
 													</button>
@@ -122,152 +146,75 @@
 									</thead>
 
 									<tbody>
-										<tr>
-											<td class="center">
-												<label>
-													<input type="checkbox" />
-													<span class="lbl"></span>
-												</label>
-											</td>
+										<?php
+												$db = new conexion();
+												$sql = "SELECT * FROM empleados";
+												$res = $db->ejecutar($sql);
+												$num = mysql_num_rows($res);
+												for ($i=0; $i < $num; $i++) { 
+													# code...
+													echo "<tr>";
+													$register = mysql_fetch_array($res);
+													echo "<td class='center'><label><input type='checkbox' /><span class='lbl'></span></label></td>
+													<td>".$register['id']."</td>".
+													"<td>".$register['nombre']."</td>".
+													"<td class='hidden-480'>".$register['edad']."</td>".
+													"<td class='hidden-480'>".$register['id_permiso']."</td>".
+													"<td class='hidden-phone'> ".$register['antiguedad']."</td>".
+													"<td class='hidden-480' style='max-width:150px;'>".$register['direccion']."</td>".
+													"<td>".$register['telefono']."</td>";
+													echo '<td class="td-actions center">
+														<div class="hidden-phone visible-desktop action-buttons">
+															<a class="blue" href="#">
+																<i class="icon-zoom-in bigger-130"></i>
+															</a>
 
-											<td>
-												<a href="#">84846684</a>
-											</td>
-											<td>Nombre</td>
-											<td class="hidden-480">La descrip.</td>
-											<td class="hidden-480">Calzado.</td>
-											<td class="hidden-phone">Feb 12</td>
+															<a class="green" href="#">
+																<i class="icon-pencil bigger-130"></i>
+															</a>
 
-											<td class="hidden-480">
-												$50.00
-											</td>
-											<td class="hidden-480">
-												Xalapa, Ver.
-											</td>
+															<a class="red" href="#">
+																<i class="icon-trash bigger-130"></i>
+															</a>
+														</div>
 
-											<td class="td-actions">
-												<div class="hidden-phone visible-desktop action-buttons">
-													<a class="blue" href="#">
-														<i class="icon-zoom-in bigger-130"></i>
-													</a>
+														<div class="hidden-desktop visible-phone">
+															<div class="inline position-relative">
+																<button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+																	<i class="icon-caret-down icon-only bigger-120"></i>
+																</button>
 
-													<a class="green" href="#">
-														<i class="icon-pencil bigger-130"></i>
-													</a>
+																<ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">
+																	<li>
+																		<a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+																			<span class="blue">
+																				<i class="icon-zoom-in bigger-120"></i>
+																			</span>
+																		</a>
+																	</li>
 
-													<a class="red" href="#">
-														<i class="icon-trash bigger-130"></i>
-													</a>
-												</div>
+																	<li>
+																		<a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+																			<span class="green">
+																				<i class="icon-edit bigger-120"></i>
+																			</span>
+																		</a>
+																	</li>
 
-												<div class="hidden-desktop visible-phone">
-													<div class="inline position-relative">
-														<button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-															<i class="icon-caret-down icon-only bigger-120"></i>
-														</button>
-
-														<ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">
-															<li>
-																<a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-																	<span class="blue">
-																		<i class="icon-zoom-in bigger-120"></i>
-																	</span>
-																</a>
-															</li>
-
-															<li>
-																<a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-																	<span class="green">
-																		<i class="icon-edit bigger-120"></i>
-																	</span>
-																</a>
-															</li>
-
-															<li>
-																<a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-																	<span class="red">
-																		<i class="icon-trash bigger-120"></i>
-																	</span>
-																</a>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td class="center">
-												<label>
-													<input type="checkbox" />
-													<span class="lbl"></span>
-												</label>
-											</td>
-
-											<td>
-												<a href="#">8999984</a>
-											</td>
-											<td>Nombre2</td>
-											<td class="hidden-480">La 2da descrip.</td>
-											<td class="hidden-480">Ropa</td>
-											<td class="hidden-phone">Feb 12</td>
-
-											<td class="hidden-480">
-												$50.00
-											</td>
-											<td class="hidden-480">
-												Toluca, Edo. de Mexico
-											</td>
-
-											<td class="td-actions">
-												<div class="hidden-phone visible-desktop action-buttons">
-													<a class="blue" href="#">
-														<i class="icon-zoom-in bigger-130"></i>
-													</a>
-
-													<a class="green" href="#">
-														<i class="icon-pencil bigger-130"></i>
-													</a>
-
-													<a class="red" href="#">
-														<i class="icon-trash bigger-130"></i>
-													</a>
-												</div>
-
-												<div class="hidden-desktop visible-phone">
-													<div class="inline position-relative">
-														<button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-															<i class="icon-caret-down icon-only bigger-120"></i>
-														</button>
-
-														<ul class="dropdown-menu dropdown-icon-only dropdown-yellow pull-right dropdown-caret dropdown-close">
-															<li>
-																<a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-																	<span class="blue">
-																		<i class="icon-zoom-in bigger-120"></i>
-																	</span>
-																</a>
-															</li>
-
-															<li>
-																<a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-																	<span class="green">
-																		<i class="icon-edit bigger-120"></i>
-																	</span>
-																</a>
-															</li>
-
-															<li>
-																<a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-																	<span class="red">
-																		<i class="icon-trash bigger-120"></i>
-																	</span>
-																</a>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</td>
-										</tr>
+																	<li>
+																		<a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+																			<span class="red">
+																				<i class="icon-trash bigger-120"></i>
+																			</span>
+																		</a>
+																	</li>
+																</ul>
+															</div>
+														</div>
+													</td>';
+													echo "</tr>";
+												}
+											?>
 									</tbody>
 								</table>
 							</div>

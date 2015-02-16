@@ -1,11 +1,12 @@
 <?php 
 	$titulosoft = 'Punto Venta!!';
-	$skin = 'skin-1'; // skin-1, skin-2, skin-3. para dejarlo default solo dejarlo en blanco
+	$skin = 'skin-3'; // skin-1, skin-2, skin-3. para dejarlo default solo dejarlo en blanco
 
 	$url = ''.$_SERVER["REQUEST_URI"].'';
 	session_start();
 	$conexion = session_status();	
 	if(!isset($_SESSION["username"])){session_destroy();}
+
 
 if(is_session_started()){
 	include('content/template/topskin.html');
@@ -19,7 +20,8 @@ if(is_session_started()){
 	}
 	if(!isset($_SESSION["username"])){
 	include("php/loginstyle.php");
-	/*echo "<div class = 'container'>
+	/* Login hecho por leo
+	echo "<div class = 'container'>
 			 <link rel='stylesheet' href='css/stylepass.css'>
 		       <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 		       <link href='http://fonts.googleapis.com/css?family=Pacifico&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
@@ -39,6 +41,8 @@ if(is_session_started()){
 		</div>";*/
 	}
 }
+
+
 function is_session_started()
 {
     if ( php_sapi_name() !== 'cli' ) {
@@ -53,18 +57,23 @@ function is_session_started()
 // Example
 function request(){
 	include ('php/conexion.php');
+	$db = new conexion();
 	if(isset($_POST["username"]) && isset($_POST["password"])){
-			$db = new conexion();
+			
 			$pquery = "SELECT * FROM empleados WHERE usuario = '".$_POST["username"]."' and contrasena = '".$_POST["password"]."'";
 			$res = $db->ejecutar($pquery);
 			if($row = mysql_fetch_array($res) > 0){
 				session_start();
 				$_SESSION['username'] = $_POST['username'];
+				$suc = mysql_query("SELECT id_sucursal FROM empleados WHERE usuario = '".$_POST['username']."'");
+				$_SESSION['id_sucursal'] = $suc;
+				#$direccion = mysql_query("SELECT direccion FROM sucursales WHERE id = '1'");
 				echo '<script>location.reload();</script>';
 		}else{
 			echo '<script language="javascript">alert("Error en las credenciales");</script>'; 
 		}
 	}
+	$db->close();
 }
 function url($url){
 	switch($url){

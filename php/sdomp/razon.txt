@@ -1,0 +1,1 @@
+Esta libreria hace que PHP tenga la posibilidad de manipular el dom
