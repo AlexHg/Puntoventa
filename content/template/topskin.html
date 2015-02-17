@@ -527,17 +527,18 @@
 					<ul class="breadcrumb">
 						<li>
 							<i class="icon-home home-icon"></i>
-							<a href="#">Home</a>
+							<a href="index.php?page=hacerventa">Home</a>
 
 							<span class="divider">
 								<i class="icon-angle-right arrow-icon"></i>
 							</span>
 						</li>
-						<li class="active">Hacer venta</li>
+						<script type="text/javascript">$("#pag-actu").html($(".menu-text").html());</script>
+						<li class="active" id="pag-actu"></li>
 					</ul><!--.breadcrumb-->
 
 					<div style="margin-top:.2em;" class="nav-search" id="nav-search">
-						<span ></span>
+						<span ><?PHP echo 'Direccion sucursal';?></span>
 						<!--<form class="form-search" />
 							<span class="input-icon">
 								<input type="text" placeholder="Search ..." class="input-small nav-search-input" id="nav-search-input" autocomplete="off" />

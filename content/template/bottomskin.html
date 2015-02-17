@@ -1,6 +1,7 @@
 <!-- Con este script se produce una accion al detectar el codigo QR -->
 
 <!-- Basicos -->
+
 <script type="text/javascript">
 	if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 </script>
@@ -33,6 +34,9 @@
 
 <script src="js/jsofmine2.js"></script>
 <script src="js/jquery.PrintArea.js"></script>
-<script src="js/qrscanner/check&sound.js"></script>
+<?PHP if ($url == '/puntoventa/index.php?page=hacerventa'){
+	echo '<script src="js/qrscanner/check&sound.js"></script>';
+} ?>
+
 </body>
 </html>
