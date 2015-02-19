@@ -31,6 +31,7 @@ $(document).ready(function () {
 			//reproduce el sonido de check
 			$.playSound('sounds/qrscanner/check');
 			sound_access = false;
+			change();
 		}
 		//Establece que debe pasar 1.5 segundos para el proximo sonido.
 		setTimeout(function(){sound_access = true;}, 1500);
@@ -44,6 +45,29 @@ $(document).ready(function () {
 		console.log(videoError);
 	});
 });
+
+//bind valida multiples eventos a la vez, cualquier cosa de ellas que pase ejecuaran el codigo
+$("#qrcode").bind("change paste keyup",change());
+function change(){
+	var phpnombre_producto, phpprecio_producto, phpdescripcion_producto, phpstock_producto;
+	var elid = $("#idproducto").val();
+	//alert("cambio!");
+	var idGo = {'elid' : elid };
+	$.ajax({
+	    data:  idGo,
+	    url:   'php/datosproducto.php',
+	    type:  'post',
+	    beforeSend: function () {
+	        $("#resultado").html("Procesando, espere por favor...");
+	    },
+		success:  function () {
+		    $("#nombreproducto").val(phpnombre_producto);
+		    $("#precioproducto").val(phpprecio_producto);
+		    $("#descripcionproducto").val(phpdescripcion_producto);
+		    $("#stockproducto").html(phpstock_producto);
+		}
+	});
+}
 
 (function($){
 	$.extend({
@@ -76,7 +100,7 @@ $('#addarticle').click(function(){
 		n_productos++;
 		//suma el valor del contador
 		contador = contador+1;
-		//calcula el precio del o los productos del mismo id (precio.uidad * cantidad)
+		//calcula el precio del o los productos del mismo id (precio.unidad * cantidad)
 		precio_producto[contador] = parseInt($('#precioproducto').val()*cant_producto);
 		//toma el valor anterior de la tabla
 		var tabla_anterior = $('#carritotabla').html();
@@ -91,6 +115,7 @@ $('#addarticle').click(function(){
 		$('#totaliva').html(""+iva);
 		$('#totalneto').html(""+neto);
 		//$('#fila'+num_contador_delete).remove();
+		$("#cont-productos").html(""+(n_productos)+"");
 	}else {alert("Recuerde escanear o escribir el id de su producto antes de intentar agregarlo al carrito.");}
 });
 
@@ -112,16 +137,49 @@ function delet(num_contador_delete){
 	//El siguiente array guarda los numeros de las filas que no deben ser tomados en cuenta, cont_num_fil_el es el espacio del array en el que debe ser guardado y luego suma mas 1
 	num_filas_eliminadas[cont_num_fil_el] = num_contador_delete;
 	cont_num_fil_el++;
+	$("#cont-productos").html(""+(n_productos)+"");
 }
 
 //Elabora un ticket y lo imprime.
 //primero decide si el importe es mayor que el total y que el total sea mayor a 0, para poder proceder
 //despues calcula el cambio restando el importe del total y multiplicandolo por -1 para hacerlo positivo
+var actualizar = 0;
 $('#realizar_venta').click(function(){if($('#importe_input').val() >= total && total > 0 ){
 	$('#importe_regis').html(""+$('#importe_input').val());
 	var cam = total - $('#importe_input').val();
 	var cambio = -1*cam;
 	$('#cambio').html(""+cambio);
+	//Esta parte de la funcion envia una respuesta al servidor mediante el metodo de programacion ajax, llamando el archivo proceso.php que se encarga de hacerlo.
+	var valorcont = $("#cont-productos").html();
+	if(parseInt(valorcont) != 0 || parseInt(valorcont) != "0"){
+		var i = parseInt(valorcont) - 1;
+	    var parametro = "";
+
+	    for(var fi = 0; fi <= i; fi++){
+	    	var idprod_parametro = $("#carritotabla tr:nth-child("+(fi+1)+") td:nth-child(1)").html();
+	    	var cantprod_parametro = $("#carritotabla tr:nth-child("+(fi+1)+") td:nth-child(4)").html();
+	    	parametro = ""+parametro+"("+idprod_parametro+","+cantprod_parametro+")";
+	    	cantidad_parametro = valorcont;
+	    }
+	    var dataGo = {
+	    	'parametro' : parametro,
+	    	'cantidad_parametro' : cantidad_parametro 
+	    };
+	    $.ajax({
+	        data:  dataGo,
+	        url:   'php/enviarventa.php',
+	        type:  'post',
+	        beforeSend: function () {
+	            $("#resultado").html("Procesando, espere por favor...");
+	        },
+		    success:  function (response) {
+			    $("#resultado").html(response);
+			    //una vez recibida la respuesta del php exitosamente, refrescamos la pagina
+			    //location.reload();
+			}
+		});
+	}
+	//fin de la respuesta al servidor.
 	if(confirm('Se ha generado un ticket. ¿Desea imprimirlo?')){
 		var ficha = $('#comprascontainer').html();
 		var totales_ficha = $('#totales').html();
@@ -135,6 +193,7 @@ $('#realizar_venta').click(function(){if($('#importe_input').val() >= total && t
 		ventimp.close();
 
 		alert('Gracias por su compra, vuelva pronto!');
-		location.reload();
-	}	
+	}
 }else{alert('Recuerde que debe ingresar un importe mayor o igual al total y tiene que haber productos en el carrito antes de intentar proceder.');}});
+
+
