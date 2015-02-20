@@ -47,10 +47,13 @@ $(document).ready(function () {
 });
 
 //bind valida multiples eventos a la vez, cualquier cosa de ellas que pase ejecuaran el codigo
-$("#qrcode").bind("change paste keyup",change());
+$("#qrcode").bind("change paste keypress",function(){change()});
 function change(){
-	var phpnombre_producto, phpprecio_producto, phpdescripcion_producto, phpstock_producto;
-	var elid = $("#idproducto").val();
+	//Codigo jquery con el metodo de prograacion ajax donde, por medio de este, se pasa el id del producto hacia php y este se encarga de buscar una coincidencia en la base de datos, devolviendo hacia el mismo php una serie de variables con las caracteristicas del producto.
+	
+	//var phpnombre_producto, phpprecio_producto, phpdescripcion_producto, phpstock_producto;
+	var elid = $("#qrcode").val();
+	//alert($("#qrcode").val());
 	//alert("cambio!");
 	var idGo = {'elid' : elid };
 	$.ajax({
@@ -58,13 +61,62 @@ function change(){
 	    url:   'php/datosproducto.php',
 	    type:  'post',
 	    beforeSend: function () {
-	        $("#resultado").html("Procesando, espere por favor...");
+	        //$("#resultado").html("Procesando, espere por favor...");
 	    },
-		success:  function () {
-		    $("#nombreproducto").val(phpnombre_producto);
-		    $("#precioproducto").val(phpprecio_producto);
-		    $("#descripcionproducto").val(phpdescripcion_producto);
-		    $("#stockproducto").html(phpstock_producto);
+		success:  function (response) {
+			//Aqui, jquery recibe una cadena de texto generada desde php con las variables generadas a partir de los datos recibidos de la base de datos y este script de respuesta se encarga de convertir esa cadena, desmenusandola a detalle, en variables aparte segun la gerarquia de contenido anteriormente programada.
+			var nombre = "";
+			var precio = "";
+			var descripcion = "";
+			var stock = "";
+			var a = 1;
+			var b = 0;
+			var c = 0;
+			var d = 0;
+			var tamano = response.length-1;
+		    for(a; a < response.length; a++){
+		    	if(response[a] != "[" || response[a] != "]"){
+		    		nombre = "" + nombre + response[a] + "";
+		    	}
+		    	if (response[a] == "]") {
+		    		b = a+2;
+		    		a = response.length;
+		    	};
+		    }
+		    for(b; b < response.length; b++){
+		    	if(response[b] != "[" || response[b] != "]"){
+		    		precio = "" + precio + response[b] + "";
+		    	}
+		    	if (response[b] == "]") {
+		    		c = b+2;
+		    		b = response.length;
+		    	};
+		    }
+		    for(c; c < response.length; c++){
+		    	if(response[c] != "[" || response[c] != "]"){
+		    		descripcion = "" + descripcion + response[c] + "";
+		    	}
+		    	if (response[c] == "]") {
+		    		d = c+2;
+		    		c = response.length;
+		    	};
+		    }
+		    for(d; d < response.length; d++){
+		    	if(response[d] != "[" || response[d] != "]"){
+		    		stock = "" + stock + response[d] + "";
+		    	}
+		    }
+		    //elimina los corchetes al final de cada una de las cadenas.
+		    nombre = nombre.replace("]", "");
+		    precio = precio.replace("]", "");
+		    descripcion = descripcion.replace("]", "");
+		    stock = stock.replace("]", "");
+		    $("#nombreproducto").val(nombre);
+		    $("#precioproducto").val(precio);
+		    $("#descripcionproducto").val(descripcion);
+		    $("#stockproducto").html(stock);
+		    $("#cantidadproducto").val(1)
+		    $('#addarticle').focus();
 		}
 	});
 }
@@ -96,18 +148,23 @@ $('#addarticle').click(function(){
 	nombre_producto = $('#nombreproducto').val();
 	fecha_hora = ""+new Date().getFullYear()+"/"+cero_ms+(new Date().getMonth()+1)+"/"+cero_da+new Date().getDate()+" - "+cero_hr+new Date().getHours()+":"+cero_mn+new Date().getMinutes()+":"+cero_sg+new Date().getSeconds()+"";
 	cant_producto = parseInt($('#cantidadproducto').val());
-	if(id_producto != false && cant_producto != false){
+	if(id_producto != false && cant_producto != false && nombre_producto!= false && $('#precioproducto').val() != "00.00"){
+		/*for(var conti = 0; conti < n_productos; conti++ ){
+			if(id_producto == $("#carritotabla tr:nth-child("+conti+") td:nth-child(1)").html()){
+				$("#carritotabla tr:nth-child("+conti+") td:nth-child(4)").html(parseInt($("#carritotabla tr:nth-child("+conti+") td:nth-child(4)").html())+cant_producto);
+			}
+		}*/ //Este pedaso de script(que se encuentra comentado) intenta, fallidamente, comparar si en la tabla inferior al boton #addarticle, se encuentra un id igual al producto a agregar, siendo el caso se sumaria la cantidad añadida en este momento con la anteriormente impresa en la tabla.
 		n_productos++;
 		//suma el valor del contador
 		contador = contador+1;
 		//calcula el precio del o los productos del mismo id (precio.unidad * cantidad)
-		precio_producto[contador] = parseInt($('#precioproducto').val()*cant_producto);
+		precio_producto[contador] = parseFloat($('#precioproducto').val()*cant_producto);
 		//toma el valor anterior de la tabla
 		var tabla_anterior = $('#carritotabla').html();
 		//introduce el valor del producto nuevo pero no sin antes sumar los anteriores
 		$('#carritotabla').html(tabla_anterior+"<tr id='fila"+contador+"'><td id='id"+contador+"' class='idpr'>"+id_producto+"</td><td id='nombre"+contador+"'class='hidden-480 nombrepr'>"+nombre_producto+"</td><td id='fecha"+contador+"'class='fechapr hidden-phone'>"+fecha_hora+"</td><td id='cantidad"+contador+"' class'cantpr>"+cant_producto+"</td><td>$<span id='precio"+contador+"' class='preciopr'>"+precio_producto[contador]+"</td><td style='text-align:center;' class='deletebutton'><button id='delete"+contador+"' onclick='delet("+contador+")' class='btn btn-mini btn-danger'><i class='icon-trash bigger-120'></i></button></td></tr>");
 		//se agrega un valor al array en la posicion x (x = al valor del contador ) 
-		total = parseInt(total) + parseInt(precio_producto[contador]);
+		total = parseFloat(total) + parseFloat(precio_producto[contador]);
 		$('#totalprecio').html(""+total);
 		$('#total_neto_iva').html($('#totalprecio').html());
 		var iva = total*0.16;
@@ -154,16 +211,19 @@ $('#realizar_venta').click(function(){if($('#importe_input').val() >= total && t
 	if(parseInt(valorcont) != 0 || parseInt(valorcont) != "0"){
 		var i = parseInt(valorcont) - 1;
 	    var parametro = "";
-
+	    //Jquery envia una cadena con todos los parametros de cada uno de los productos, despues, php, se encargara de desmenusar la cadena de texto inteligente mente para extraer los datos del array.
 	    for(var fi = 0; fi <= i; fi++){
 	    	var idprod_parametro = $("#carritotabla tr:nth-child("+(fi+1)+") td:nth-child(1)").html();
+	    	var fecha_parametro = $("#carritotabla tr:nth-child("+(fi+1)+") td:nth-child(3)").html();
 	    	var cantprod_parametro = $("#carritotabla tr:nth-child("+(fi+1)+") td:nth-child(4)").html();
-	    	parametro = ""+parametro+"("+idprod_parametro+","+cantprod_parametro+")";
+	    	parametro = ""+parametro+"["+idprod_parametro+","+fecha_parametro+","+cantprod_parametro+"]";
 	    	cantidad_parametro = valorcont;
+	    	idcliente_parametro = $("#clienteid").val();
 	    }
 	    var dataGo = {
 	    	'parametro' : parametro,
-	    	'cantidad_parametro' : cantidad_parametro 
+	    	'cantidad_parametro' : cantidad_parametro,
+	    	'idcliente_parametro' : idcliente_parametro
 	    };
 	    $.ajax({
 	        data:  dataGo,
@@ -175,19 +235,29 @@ $('#realizar_venta').click(function(){if($('#importe_input').val() >= total && t
 		    success:  function (response) {
 			    $("#resultado").html(response);
 			    //una vez recibida la respuesta del php exitosamente, refrescamos la pagina
-			    //location.reload();
+			    location.reload();
 			}
 		});
 	}
 	//fin de la respuesta al servidor.
+	//Generador del ticket con una funcion javascript e impresion
 	if(confirm('Se ha generado un ticket. ¿Desea imprimirlo?')){
 		var ficha = $('#comprascontainer').html();
 		var totales_ficha = $('#totales').html();
 		var ventimp=window.open(' ', "_blank", "toolbar=yes, scrollbars=yes, width=1000, height=900 ");
-		var head = '<h1>Mi Empresa/Negocio <small>'+""+new Date().getDate()+"/"+(new Date().getMonth()+1)+"/"+new Date().getFullYear()+" - "+new Date().getHours()+":"+new Date().getMinutes()+":"+new Date().getSeconds()+""+'</small></h1><br><br>';
+		var head = '<h1 align="center">Mi Empresa/Negocio <br><small>'+""+new Date().getDate()+"/"+(new Date().getMonth()+1)+"/"+new Date().getFullYear()+" - "+new Date().getHours()+":"+new Date().getMinutes()+":"+new Date().getSeconds()+""+'</small></h1><br>';
+
+		var mensaje = 'Gracias por comprar en mi empresa/negocio, vuelve pronto! <br>';
+		var vendedor = usuario_session;
+		var compradorId = $("#clienteid").val();
+
+		var infoCompraV = '<span >Vendedor: '+vendedor+'';
+		if($("#clienteid").val()){infoCompraV=''+infoCompraV+' &nbsp;&nbsp;Cliente ID: '+compradorId+'';} 
+		infoCompraV =  ''+infoCompraV+'</span>';
+
 		var cssstyle = '<head><title>Imprimir factura</title></head><link href="assets/css/bootstrap.min.css" rel="stylesheet" /><link href="assets/css/bootstrap-responsive.min.css" rel="stylesheet" /><link rel="stylesheet" href="assets/css/font-awesome.min.css" /><link rel="stylesheet" href="assets/css/ace.min.css" /><link rel="stylesheet" href="assets/css/ace-responsive.min.css" /><link rel="stylesheet" href="assets/css/ace-skins.min.css" />';
 		var jscript = '<script src="js/jquery-1.11.2.min.js"></script><script>$(".deletebutton").remove(); $(".idpr").remove();</script>';
-		ventimp.document.write(cssstyle+'<div style="width: 8cm !important;">'+head+ficha+'<div class="span5">'+totales_ficha+'</div></div>'+jscript);
+		ventimp.document.write(cssstyle+'<div style="width: auto !important;">'+head+mensaje+'<br>'+infoCompraV+ficha+'<div class="span5">'+totales_ficha+'</div></div>'+jscript);
 		ventimp.document.close();
 		ventimp.print();
 		ventimp.close();
@@ -195,5 +265,3 @@ $('#realizar_venta').click(function(){if($('#importe_input').val() >= total && t
 		alert('Gracias por su compra, vuelva pronto!');
 	}
 }else{alert('Recuerde que debe ingresar un importe mayor o igual al total y tiene que haber productos en el carrito antes de intentar proceder.');}});
-
-

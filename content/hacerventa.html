@@ -12,14 +12,14 @@
 						  		<h3>Informacion producto</h3>
 						    	<form>
 						    		<input type="text" name="qrcode" id="qrcode" maxlength="12" style="max-width:110px" placeholder="ID. Producto" required></input>&nbsp;&nbsp;
-						    		<input type="text" name="nombreproducto" id="nombreproducto" placeholder="Nombre Producto" disabled></input>&nbsp;&nbsp;
+						    		<input type="text" name="nombreproducto" id="nombreproducto" placeholder="Nombre Producto" readonly></input>&nbsp;&nbsp;
 						    		<input type="number" name="cantidadproducto" id="cantidadproducto" maxlength="2" style="max-width:48px" min="1" placeholder="Cant." required></input>&nbsp;&nbsp;
 						    		<span class="input-prepend">
 										<span class="add-on"><i class="icon-dollar"></i></span>
-										<input type="number" name="precioproducto" id="precioproducto" disabled style="max-width:70px" placeholder="00.00" required></input>
+										<input type="text" name="precioproducto" id="precioproducto" readonly style="max-width:70px" value="00.00" required></input>
 									</span>&nbsp;&nbsp;
 									<div>
-										<textarea disabled id="descripcionproducto" placeholder="Descripción del producto" style="resize: none; min-height: 5em; max-width: 93%; width:37.9em;"></textarea>
+										<textarea readonly id="descripcionproducto" placeholder="Descripción del producto" style="resize: none; min-height: 5em; max-width: 93%; width:37.9em;"></textarea>
 									</div>
 									<div>
 										<p>Stock actual: <span id="stockproducto">0</span> unidades.</p>
@@ -32,6 +32,7 @@
 										<i class="icon-undo bigger-110"></i> Limpiar
 										</button>
 									</div>
+									<br><input type="checkbox" id="autoadd" value="on"/> Agregar articulos automanticamente con el QrChecker
 						    	</form>
 						  	</div>
 						</div>
@@ -99,7 +100,7 @@
 										<span> - Ingrese el importe</span>
 											<br><br>
 										<span class="add-on"><i class="icon-male"></i></span>
-										<input type="client" name="clienteid" id="clienteid" style="max-width:160px" placeholder="ID. cliente"></input>
+										<input type="text" name="clienteid" id="clienteid" style="max-width:160px" placeholder="ID. cliente"></input>
 											<br>
 									</div>
 									<div class="span6" id="totales" align="right">

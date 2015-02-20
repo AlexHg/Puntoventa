@@ -7,9 +7,9 @@
 	$conexion = session_status();	
 	if(!isset($_SESSION["username"])){session_destroy();}
 
-
 if(is_session_started()){
 	include('content/template/topskin.html');
+	echo '<script>var usuario_session = "'.$_SESSION["username"].'"; </script>';
 	include(url($url));
 	echo "<div class='row-fluid'><div class='span12' style='height:100px'></div><div>";
 	include('js/chat.html');
